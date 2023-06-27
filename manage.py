@@ -2,11 +2,18 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+from elevator_problem.settings import base
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'elevator_problem.settings')
+    if base.DEBUG:
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE',
+                              'elevator_problem.settings.local')
+    else:
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE',
+                              'elevator_problem.settings.production')
+
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ecommerce.settings.base')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

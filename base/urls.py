@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import create
+from .views import CreateLiftView, LiftView
 
 urlpatterns =[
-     path('hello/', create)
+     path('lift/',LiftView.as_view()),
+    path('create/', CreateLiftView.as_view())
 ]

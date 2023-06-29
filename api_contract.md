@@ -26,8 +26,8 @@
 3. PUT moveUp/
 
 * It takes two parameter 
-    next_floor - next floor for closest lift 
-    group - which group does lift belong to
+    * next_floor - next floor for closest lift 
+    * group - which group does lift belong to
 * returns the closest lift with updated floor
 * no payload
 

@@ -63,7 +63,6 @@ class ElevatorUpView(APIView):
         serializer_class = ElevatorSerializer
         lookup_url_kwargs = ('above_floor','group')
         
-
         def put(self,request,format=None):
             above_floor = int(request.GET.get(self.lookup_url_kwargs[0]))
             group = request.GET.get(self.lookup_url_kwargs[1])

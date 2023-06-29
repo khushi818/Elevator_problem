@@ -61,19 +61,19 @@ class CreateLiftView(APIView):
 
 class ElevatorUpView(APIView):
         serializer_class = ElevatorSerializer
-        lookup_url_kwargs = ('above_floor','group')
+        lookup_url_kwargs = ('next_floor','group')
         
         def put(self,request,format=None):
-            above_floor = int(request.GET.get(self.lookup_url_kwargs[0]))
+            next_floor = int(request.GET.get(self.lookup_url_kwargs[0]))
             group = request.GET.get(self.lookup_url_kwargs[1])
-            lift_id = closest_lift(above_floor,group)
+            lift_id = closest_lift(next_floor,group)
             lift = Elevator.objects.get(id = lift_id)
             if not lift.maintainence:
-                   if(lift.floor > above_floor):
+                   if(lift.floor > next_floor):
                        lift.move_up = False
-                   elif (lift.floor < above_floor):
+                   elif (lift.floor < next_floor):
                        lift.move_up = True
-                   lift.floor = above_floor
+                   lift.floor = next_floor
                    lift.save()
                    serialiser = ElevatorSerializer(lift)
                    return Response(serialiser.data, status=status.HTTP_200_OK)

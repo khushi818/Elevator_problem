@@ -63,6 +63,7 @@ class ElevatorUpView(APIView):
         serializer_class = ElevatorSerializer
         lookup_url_kwargs = ('above_floor','group')
         
+
         def put(self,request,format=None):
             above_floor = int(request.GET.get(self.lookup_url_kwargs[0]))
             group = request.GET.get(self.lookup_url_kwargs[1])
@@ -86,6 +87,7 @@ class toggleLiftMotionView(APIView):
     def put(self, request, pk=None):
           lift = Elevator.objects.get(pk=pk)
           lift.in_motion = not lift.in_motion
+          if(lift.in_motion): lift.door_open = False
           lift.save()
           serialiser = ElevatorSerializer(lift)
           return Response(serialiser.data, status=status.HTTP_200_OK)
@@ -96,7 +98,7 @@ class DoorMotionView(APIView):
       
       def put(self,request,pk = None):
            lift = Elevator.objects.get(pk=pk)
-           if lift.in_motion:
+           if not lift.in_motion:
                 lift.door_open = True
            else :
                lift.door_open = False

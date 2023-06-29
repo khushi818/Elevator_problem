@@ -9,6 +9,7 @@ Clone the repository to your local machine.
   ```env\Scripts\activate``` on Windows
 * Install the required Python packages by running
   ```pip install -r requirements.txt```
+* In settings folder, change DEBUG = TRUE in base file
   * Then,
     ```python manage.py makemigrations```
     

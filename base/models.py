@@ -10,7 +10,7 @@ class Elevator(models.Model):
     maintainence = models.BooleanField(default=False)
     # lift moves up if true
     move_up = models.BooleanField(default=True)
-    # left moves down if false
+    # whether the lift is moving or not
     in_motion = models.BooleanField(default=False)
     # list of elevator in one group
     group_number = models.CharField(max_length=20)
